@@ -1,0 +1,84 @@
+{
+  "as_of": "2026-10-25",
+  "controls": [
+    {
+      "control_id": "AC-01",
+      "title": "Quarterly production access review",
+      "owner": "identity-governance",
+      "policy_id": "POL-ACCESS-01",
+      "requirement": "Review all production privileged access at least every 90 days; document exceptions and control-owner sign-off.",
+      "max_age_days": 90,
+      "scope": "production"
+    },
+    {
+      "control_id": "BC-01",
+      "title": "Backup restoration testing",
+      "owner": "platform-reliability",
+      "policy_id": "POL-RESILIENCE-02",
+      "requirement": "Successfully test production backup restoration at least every 90 days and retain the test record.",
+      "max_age_days": 90,
+      "scope": "production"
+    },
+    {
+      "control_id": "VR-01",
+      "title": "Annual critical-vendor risk review",
+      "owner": "third-party-risk",
+      "policy_id": "POL-VENDOR-03",
+      "requirement": "Review critical-vendor risk at least every 365 days and retain the completed review.",
+      "max_age_days": 365,
+      "scope": "critical-vendors"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ACCESS-2026Q2",
+      "control_id": "AC-01",
+      "title": "Production privileged access review",
+      "collected_on": "2026-06-30",
+      "scope": "production",
+      "result": "pass",
+      "source": "synthetic://identity/reviews/2026-Q2",
+      "content": "Q2 production review completed. Q3 review and sign-off are not present in the evidence repository."
+    },
+    {
+      "evidence_id": "EV-ACCESS-STAGING",
+      "control_id": "AC-01",
+      "title": "Staging access review",
+      "collected_on": "2026-10-20",
+      "scope": "staging",
+      "result": "pass",
+      "source": "synthetic://identity/reviews/staging",
+      "content": "Staging review completed. This does not establish production access coverage."
+    },
+    {
+      "evidence_id": "EV-RESTORE-20261010",
+      "control_id": "BC-01",
+      "title": "Production restore drill",
+      "collected_on": "2026-10-10",
+      "scope": "production",
+      "result": "pass",
+      "source": "synthetic://backup/restore-tests/20261010",
+      "content": "Production restore test succeeded; checksum verification and recovery timing recorded."
+    }
+  ],
+  "playbooks": [
+    {
+      "playbook_id": "PB-ACCESS-01",
+      "control_id": "AC-01",
+      "title": "Access review evidence collection",
+      "content": "Request a current production privileged-access export, review all entries, resolve exceptions and obtain identity-governance sign-off. Never revoke access automatically."
+    },
+    {
+      "playbook_id": "PB-RESTORE-02",
+      "control_id": "BC-01",
+      "title": "Restore test evidence collection",
+      "content": "Request the latest production restoration test record. If missing or failed, propose an isolated test for platform-reliability approval. Never change production backups automatically."
+    },
+    {
+      "playbook_id": "PB-VENDOR-03",
+      "control_id": "VR-01",
+      "title": "Vendor review evidence collection",
+      "content": "Ask third-party-risk for the current critical-vendor inventory and completed annual reviews. Missing evidence is not proof that a vendor failed its review. Never approve a vendor or publish an attestation."
+    }
+  ]
+}
